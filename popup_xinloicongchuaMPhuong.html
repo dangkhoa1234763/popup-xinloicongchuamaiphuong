@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xin lỗi công chúa 😢</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffaf0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+    }
+
+    #clickButton {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ffce54;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup {
+      position: absolute;
+      width: 300px;
+      background: #fff3cd;
+      border: 2px solid #f7c948;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .popup.visible {
+      opacity: 1;
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #ffeeba;
+      border-bottom: 1px solid #f0ad4e;
+    }
+
+    .popup-header img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .popup-buttons div {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-left: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .minimize { background: #f0ad4e; }
+    .maximize { background: #5bc0de; }
+    .close { background: #d9534f; }
+
+    .popup-body {
+      padding: 10px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <button id="clickButton">Bấm vào đâyyyy 💛</button>
+
+  <script>
+    document.getElementById('clickButton').addEventListener('click', function () {
+      let numberOfPopups = 200;
+      let delay = 150;
+
+      for (let i = 0; i < numberOfPopups; i++) {
+        setTimeout(() => createPopup(), i * delay);
+      }
+    });
+
+    function createPopup() {
+      const popup = document.createElement('div');
+      popup.classList.add('popup');
+
+      // Header
+      const header = document.createElement('div');
+      header.classList.add('popup-header');
+
+      const cheeseImg = document.createElement('img');
+      cheeseImg.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT62SqmDr4b8XGe99nCp8lvPfZkb6-po-8-qg&s';
+      header.appendChild(cheeseImg);
+
+      const buttons = document.createElement('div');
+      buttons.classList.add('popup-buttons');
+
+      const minimizeBtn = document.createElement('div');
+      minimizeBtn.classList.add('minimize');
+
+      const maximizeBtn = document.createElement('div');
+      maximizeBtn.classList.add('maximize');
+
+      const closeBtn = document.createElement('div');
+      closeBtn.classList.add('close');
+      closeBtn.addEventListener('click', () => {
+        popup.remove();
+      });
+
+      buttons.appendChild(minimizeBtn);
+      buttons.appendChild(maximizeBtn);
+      buttons.appendChild(closeBtn);
+      header.appendChild(buttons);
+
+      // Body
+      const body = document.createElement('div');
+      body.classList.add('popup-body');
+      body.innerText = 'tui xin lỗi công chúa Mai Phương ạ😭, iuuu công chúa lắm á';
+
+      popup.appendChild(header);
+      popup.appendChild(body);
+      document.body.appendChild(popup);
+
+      // Vị trí random
+      const x = Math.random() * (window.innerWidth - 350);
+      const y = Math.random() * (window.innerHeight - 220);
+      popup.style.left = `${x}px`;
+      popup.style.top = `${y}px`;
+
+      // Hiệu ứng xuất hiện
+      setTimeout(() => {
+        popup.classList.add('visible');
+      }, 100);
+    }
+  </script>
+</body>
+</html>
